@@ -1,3 +1,29 @@
+function updateShopProducts(newProduct){
+        this.shopItems.push(newProduct);
+        document.getElementById('displayShopItems').innerHTML='';
+        this.displayShopItems();
+}
+
+function clearInputFields(){
+    document.getElementById('itemName').value=null;
+    document.getElementById('itemPrice').value=null;
+    document.getElementById('select').value='Select Category';
+    document.getElementById('import').checked= false;
+}
+
+function addItem(){
+    var itemName= document.getElementById('itemName').value;
+    var itemPrice= document.getElementById('itemPrice').value;
+    var itemCategory= document.getElementById('select').value;
+    var itemImported = document.getElementById('import').checked;
+
+    if(itemImported === true){
+        itemName = 'Imported '+itemName;
+    }
+    this.updateShopProducts({"name": itemName, "price": parseFloat(itemPrice), "isImported": itemImported, "category": itemCategory});
+    this.clearInputFields();
+}
+
 function displayShopItems(){
     let tempShopItems = JSON.parse(JSON.stringify(this.shopItems));
     tempShopItems.forEach((item, i) => {

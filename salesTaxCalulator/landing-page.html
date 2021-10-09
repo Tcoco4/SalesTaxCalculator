@@ -8,6 +8,31 @@
     <body onload="displayShopItems()">
         <div class="container">
             <h1>Sales Tax Calculator</h1>
+                <div class="row"  id="inputData">
+                    <div  class="select col s3 " >
+                        <select id="select" class="input-field col s12 browser-default" class="validate">
+                            <option id="selectCategory" disabled selected value="Select Category">Select Category</option>
+                            <option  value="Food">Food</option>
+                            <option  value="Book">Book</option>
+                            <option  value="Medical Supplies">Medical Supplies</option>
+                            <option  value="Other">Other</option>
+                        </select>
+                    </div>
+                    <div class="itemName col s3">
+                        <input id="itemName" placeholder="Item Name" type="text" class="validate">
+                    </div>
+                    <div class="itemPriceinput-field col s2">
+                        <input id="itemPrice" placeholder="Item Price" type="number" class="validate">
+                    </div>
+                    <div class="import col s2">
+                        <label>
+                            <input id="import" placeholder="Item Price" type="checkbox"><span>Import</span>
+                        </label>
+                    </div>  
+                    <div class="input-field col s3">
+                        <button class="waves-effect waves-light btn" type="submit" onclick="addItem()">Add Item</button>  
+                    </div>
+                </div>
             <h2>Shop Items</h2>
             <div class="row col s12">
                 <div id="displayShopItems" class="col s6"></div>
