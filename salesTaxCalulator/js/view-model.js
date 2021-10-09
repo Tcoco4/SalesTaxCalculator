@@ -1,3 +1,54 @@
+ function resetBasket(){
+    clearInputFields();
+    document.getElementById('displayReceipt').innerHTML='';
+    document.getElementById('displayShopItems').innerHTML='';
+    displayShopItems();
+}
+
+function calculateTotal(){
+        document.getElementById('displayReceipt').innerHTML= '';
+    var selectedItemsIndexes = [];
+
+        $.each($('input[name="item"]:checked'), function(){
+            selectedItemsIndexes.push($(this).val());
+        })
+
+    var taxes=0;
+    var totalCost=0;
+
+    selectedItemsIndexes.forEach(index=>{
+
+        var item = shopItems[index];
+        if(item.isImported){
+                taxes += (5/100 * item.price)
+        }
+
+        if( item.category === 'Other'){
+            taxes += (10/100 *  item.price);
+        }
+
+        totalCost+= item.price;
+    });
+
+    taxes = (Math.ceil(taxes*20)/20).toFixed(2);
+
+    totalCost+= parseFloat(taxes);
+
+    $('#displayReceipt').append(
+        '<h2>Receipt of Items</h2>',
+    )
+    selectedItemsIndexes.forEach(index => {
+        var item = shopItems[index];
+        $('#displayReceipt').append(
+            ''+item.name+': '+item.price+'<br>'
+        )
+    });
+    $('#displayReceipt').append(
+        'Sales Taxes: '+taxes+'<br>',
+        'Total: '+totalCost.toFixed(2)+'<br>'
+    )
+}
+
 function checkInputFields(){
     $('#submitInputData').attr('disabled', true);
     $('#select, #itemName, #itemPrice').change(function () {
